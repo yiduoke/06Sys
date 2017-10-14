@@ -25,19 +25,22 @@ struct node * insert_front(struct node * y, int z){
 
 struct node *free_list(struct node * y){
     struct node * current;
+    struct node * first=y;
     while (y){
         current=y;
         y=y->next;
         free(current);
     }   
-    return y;
+    return first;
 }
+
 void main(){
     struct node * margaret = (struct node *)malloc(sizeof(struct node));
-    margaret->x=1;
-    struct node * penn = (struct node *)malloc(sizeof(struct node));
-    margaret->next=penn;
-    penn->x=2;
-    penn->next=NULL;
+    margaret->x=0;
+    margaret->next=NULL;
+    margaret=insert_front(margaret,1);
+    margaret=insert_front(margaret,2);
     print_list(margaret);
+    printf("%p\n",margaret);
+    printf("%p",free_list(margaret));
 }
